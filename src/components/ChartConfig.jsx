@@ -1,12 +1,19 @@
 import { Container, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ChartConfig = ({ handleDelete }) => {
+const ChartConfig = ({ handleDelete, data }) => {
   const [cat, setCat] = useState("");
   const [val, setVal] = useState("");
   const [chartTitle, setChartTitle] = useState("");
   const [ref, setRef] = useState("");
+  // console.log(data);
+  useEffect(() => {
+    setCat(data.category);
+    setVal(data.values);
+    setChartTitle(data.chartTitle);
+    setRef(data.referenceComponentCode);
+  }, []);
   return (
     <Container maxWidth='xl' sx={{}}>
       <TextField

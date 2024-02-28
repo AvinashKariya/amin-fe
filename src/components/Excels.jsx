@@ -1,9 +1,9 @@
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sheet from "./Sheet";
 
-const Excels = ({ handleDelete }) => {
+const Excels = ({ handleDelete, data }) => {
   const [excelCode, setExcelCode] = useState("");
   const [excelName, setExcelName] = useState("");
   const [sheet, setSheet] = useState([]);
@@ -11,10 +11,20 @@ const Excels = ({ handleDelete }) => {
   const handleAddSheet = () => {
     setSheet([...sheet, {}]);
   };
-
+  // console.log(data);
   const handleDeleteSheet = (index) => {
     setSheet(sheet.filter((_, i) => i !== index));
   };
+
+  useEffect(() => {
+    if (data) {
+      setExcelCode(data?.excelCode);
+      setExcelName(data?.excelName);
+    }
+    if (data.sheets) {
+      setSheet(data.sheets);
+    }
+  }, []);
 
   return (
     <>
@@ -65,7 +75,11 @@ const Excels = ({ handleDelete }) => {
           maxWidth='xl'
         >
           {sheet.map((s, index) => (
-            <Sheet key={index} handleDelete={() => handleDeleteSheet(index)} />
+            <Sheet
+              key={index}
+              handleDelete={() => handleDeleteSheet(index)}
+              data={s}
+            />
           ))}
         </Container>
       </Box>

@@ -9,14 +9,16 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { typeOfComponent } from "../utils";
 import TableConfig from "./TableConfig";
 import ChartConfig from "./ChartConfig";
-const Component = ({ handleDelete }) => {
+const Component = ({ handleDelete, data }) => {
   const [compCode, setCompCode] = useState("");
   const [dbName, setDbName] = useState("");
+  const [method, setMethod] = useState("");
+  const [url, setUrl] = useState("");
   const [compType, setCompType] = React.useState("");
   const [src, setSrc] = React.useState("");
   const [isTable, setIsTable] = useState(false);
@@ -61,6 +63,34 @@ const Component = ({ handleDelete }) => {
       setChartConfig(chartConfig.filter((_, i) => i !== index));
     }
   };
+
+  useEffect(() => {
+    if (data) {
+      setCompCode(data.componentCode);
+      setCompType(data.componentType);
+      setSrc(data?.componentConfig.source);
+
+      if (data.componentType === "TABLE") {
+        setIsTable(true);
+        setTableConfig(data.componentConfig.tableConfig);
+      } else {
+        setIsTable(false);
+        setIsApi(false);
+        setIsDb(false);
+        setChartConfig([data.componentConfig.chartConfig]);
+      }
+      if (data.componentConfig.source === "db") {
+        setIsDb(true);
+        setIsApi(false);
+        setDbName(data.componentConfig.dbTableName);
+      } else {
+        setIsApi(true);
+        setIsDb(false);
+        setMethod(data.componentConfig.apiMethod);
+        setUrl(data.componentConfig.apiUrl);
+      }
+    }
+  }, []);
   return (
     <>
       <Box
@@ -115,7 +145,7 @@ const Component = ({ handleDelete }) => {
                 </Select>
               </FormControl>
             )}
-            {isDb && (
+            {isDb && isTable && (
               <TextField
                 id='outlined-basic'
                 label='DB Name'
@@ -126,7 +156,7 @@ const Component = ({ handleDelete }) => {
                 onChange={(e) => setDbName(e.target.value)}
               />
             )}
-            {isApi && (
+            {isApi && isTable && (
               <>
                 <TextField
                   id='outlined-basic'
@@ -134,8 +164,8 @@ const Component = ({ handleDelete }) => {
                   variant='filled'
                   placeholder='API method'
                   sx={{ marginRight: "25px" }}
-                  value={dbName}
-                  onChange={(e) => setDbName(e.target.value)}
+                  value={method}
+                  onChange={(e) => setMethod(e.target.value)}
                 />
                 <TextField
                   id='outlined-basic'
@@ -143,8 +173,8 @@ const Component = ({ handleDelete }) => {
                   variant='filled'
                   placeholder='API endpoint'
                   sx={{ marginRight: "25px" }}
-                  value={dbName}
-                  onChange={(e) => setDbName(e.target.value)}
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
                 />
               </>
             )}
@@ -156,16 +186,18 @@ const Component = ({ handleDelete }) => {
             <DeleteIcon />
           </IconButton>
         </Container>
-        {tableConfig.map((s, index) => (
+        {tableConfig.map((tc, index) => (
           <TableConfig
             key={index}
             handleDelete={() => handleDeleteComponent(index)}
+            data={tc}
           />
         ))}
-        {chartConfig.map((s, index) => (
+        {chartConfig.map((cc, index) => (
           <ChartConfig
             key={index}
             handleDelete={() => handleDeleteComponent(index)}
+            data={cc}
           />
         ))}
       </Box>

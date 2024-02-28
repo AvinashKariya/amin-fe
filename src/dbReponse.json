@@ -1,0 +1,356 @@
+{
+  "reportCode": 8001,
+  "excels": [
+    {
+      "excelCode": 101,
+      "excelName": "Student Details",
+      "sheets": [
+        {
+          "sheetCode": 201,
+          "sheetName": "Student Marks",
+          "components": [
+            {
+              "componentCode": 301,
+              "componentType": "TABLE",
+              "componentOrder": 1,
+              "componentConfig": {
+                "tableConfig": [
+                  {
+                    "columnName": "Student Name",
+                    "cellFormula": null,
+                    "dbColumnName": "name",
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Physics",
+                    "cellFormula": null,
+                    "dbColumnName": "physics",
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Chemistry",
+                    "cellFormula": null,
+                    "dbColumnName": "chemistry",
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Maths",
+                    "cellFormula": null,
+                    "dbColumnName": "maths",
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Percentage",
+                    "cellFormula": "(B%d+C%d+D%d)/3",
+                    "dbColumnName": "'' as percentage",
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": "YELLOW"
+                    }
+                  }
+                ],
+                "chartConfig": null,
+                "source": "db",
+                "dbTableName": "student",
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 302,
+              "componentType": "BAR CHART",
+              "componentOrder": 2,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Name",
+                  "values": "Percentage",
+                  "chartTitle": "Student Percentage Bar Chart",
+                  "referenceComponentCode": 301
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 305,
+              "componentType": "PIE CHART",
+              "componentOrder": 3,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Name",
+                  "values": "Physics",
+                  "chartTitle": "Student Physics Marks Pie Chart",
+                  "referenceComponentCode": 301
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 306,
+              "componentType": "AREA CHART",
+              "componentOrder": 4,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Name",
+                  "values": "Chemistry",
+                  "chartTitle": "Student Chemistry Marks Area Chart",
+                  "referenceComponentCode": 301
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 310,
+              "componentType": "LINE CHART",
+              "componentOrder": 4,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Name",
+                  "values": "Maths",
+                  "chartTitle": "Student Maths Marks Line Chart",
+                  "referenceComponentCode": 301
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 303,
+              "componentType": "TABLE",
+              "componentOrder": 5,
+              "componentConfig": {
+                "tableConfig": [
+                  {
+                    "columnName": "Student Class",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division A",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division B",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division C",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Total",
+                    "cellFormula": "(B%d + C%d + D%d)",
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": null
+                    }
+                  }
+                ],
+                "chartConfig": null,
+                "source": "api",
+                "dbTableName": null,
+                "apiMethod": "GET",
+                "apiUrl": "http://localhost:8090/api/getSampleData"
+              }
+            },
+            {
+              "componentCode": 304,
+              "componentType": "RADAR CHART",
+              "componentOrder": 6,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Class",
+                  "values": "Total",
+                  "chartTitle": "Class Wise Population Radar Chart",
+                  "referenceComponentCode": 303
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            }
+          ]
+        },
+        {
+          "sheetCode": 202,
+          "sheetName": "Student Population",
+          "components": [
+            {
+              "componentCode": 303,
+              "componentType": "TABLE",
+              "componentOrder": 1,
+              "componentConfig": {
+                "tableConfig": [
+                  {
+                    "columnName": "Student Class",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division A",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division B",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Division C",
+                    "cellFormula": null,
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "false",
+                      "bgColor": null
+                    }
+                  },
+                  {
+                    "columnName": "Total",
+                    "cellFormula": "(B%d + C%d + D%d)",
+                    "dbColumnName": null,
+                    "cellStyle": {
+                      "font": "Arial",
+                      "size": 12,
+                      "bold": "true",
+                      "bgColor": null
+                    }
+                  }
+                ],
+                "chartConfig": null,
+                "source": "api",
+                "dbTableName": null,
+                "apiMethod": "GET",
+                "apiUrl": "http://localhost:8090/api/getSampleData"
+              }
+            },
+            {
+              "componentCode": 309,
+              "componentType": "SCATTER CHART",
+              "componentOrder": 2,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Class",
+                  "values": "DIVISION A",
+                  "chartTitle": "Division A Standard Wise Scatter Chart",
+                  "referenceComponentCode": 303
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            },
+            {
+              "componentCode": 308,
+              "componentType": "SURFACE CHART",
+              "componentOrder": 3,
+              "componentConfig": {
+                "tableConfig": null,
+                "chartConfig": {
+                  "category": "Student Class",
+                  "values": "TOTAL",
+                  "chartTitle": "Student Class Total Surface Chart Chart",
+                  "referenceComponentCode": 303
+                },
+                "source": null,
+                "dbTableName": null,
+                "apiMethod": null,
+                "apiUrl": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

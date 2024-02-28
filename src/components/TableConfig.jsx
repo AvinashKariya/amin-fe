@@ -8,18 +8,19 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { fontColors } from "../utils";
 
-const TableConfig = ({ handleDelete }) => {
+const TableConfig = ({ handleDelete, data }) => {
   const [col, setCol] = useState("");
   const [dbcol, setDbcol] = useState("");
   const [formula, setFormula] = useState("");
   const [fstyle, setFstyle] = useState("");
   const [fsize, setFsize] = useState("");
   const [fcolor, setFcolor] = useState("");
-
+  const [isBold, setIsBold] = useState(false);
+  // console.log(data);
   const handleFstyle = (e) => {
     setFstyle(e.target.value);
   };
@@ -31,6 +32,18 @@ const TableConfig = ({ handleDelete }) => {
   const handleFcolor = (e) => {
     setFcolor(e.target.value);
   };
+
+  useEffect(() => {
+    setCol(data.columnName);
+    setDbcol(data.dbColumnName);
+    setFcolor(data.cellStyle.bgColor || "");
+    setFormula(data.cellFormula || "");
+    setFsize(data.cellStyle.size);
+    setFstyle(data.cellStyle.font.toLowerCase());
+    if (data.cellStyle.bold === "true") {
+      setIsBold(true);
+    }
+  }, []);
   return (
     <Container maxWidth='xl' sx={{}}>
       <TextField
@@ -42,7 +55,7 @@ const TableConfig = ({ handleDelete }) => {
         value={col}
         onChange={(e) => setCol(e.target.value)}
       />
-      <Checkbox onClick={(e) => console.log(e)} />
+      <Checkbox onClick={(e) => console.log(e)} checked={isBold} />
       <FormControl sx={{ width: "200px" }}>
         <InputLabel id='type-src'>Font Style</InputLabel>
         <Select
@@ -83,7 +96,7 @@ const TableConfig = ({ handleDelete }) => {
         >
           {fontColors.map((col, i) => (
             <MenuItem value={col} key={i}>
-              {col.toLowerCase()}
+              {col}
             </MenuItem>
           ))}
         </Select>

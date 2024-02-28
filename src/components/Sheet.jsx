@@ -1,9 +1,9 @@
 import { Box, Button, Container, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Component from "./Component";
 
-const Sheet = ({ handleDelete }) => {
+const Sheet = ({ handleDelete, data }) => {
   const [sheetCode, setSheetCode] = useState("");
   const [sheetName, setSheetName] = useState("");
   const [component, setComponents] = useState([]);
@@ -11,10 +11,18 @@ const Sheet = ({ handleDelete }) => {
   const handleAddComponent = () => {
     setComponents([...component, {}]);
   };
-
+  // console.log(data);
   const handleDeleteComponent = (index) => {
     setComponents(component.filter((_, i) => i !== index));
   };
+
+  useEffect(() => {
+    if (data) {
+      setSheetCode(data.sheetCode);
+      setSheetName(data.sheetName);
+      setComponents(data.components);
+    }
+  }, []);
   return (
     <>
       <Container
@@ -56,10 +64,11 @@ const Sheet = ({ handleDelete }) => {
           backgroundColor: "#BBE2EC",
         }}
       >
-        {component.map((s, index) => (
+        {component.map((c, index) => (
           <Component
             key={index}
             handleDelete={() => handleDeleteComponent(index)}
+            data={c}
           />
         ))}
       </Container>
